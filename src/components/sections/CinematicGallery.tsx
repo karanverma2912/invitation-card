@@ -9,9 +9,9 @@ import { wedding } from "@/data/wedding";
 const images = [
   { id: 1, src: wedding.groom.photo, alt: "Karan", row: 1 },
   { id: 2, src: wedding.bride.photo, alt: "Damini", row: 1 },
-  { id: 3, src: "/images/couple/karan.jpg", alt: "Couple", row: 2 },
-  { id: 4, src: "/images/couple/damini.jpg", alt: "Celebration", row: 2 },
-  { id: 5, src: "/images/maheshwar/intro.jpg", alt: "Maheshwar", row: 3 },
+  { id: 3, src: "/images/couple/together3.jpeg", alt: "Couple", row: 2 },
+  { id: 4, src: "/images/couple/together2.jpeg", alt: "Celebration", row: 2 },
+  { id: 5, src: "/images/couple/together.jpeg", alt: "Maheshwar", row: 3 },
   { id: 6, src: "/images/omkareshwar/intro.jpg", alt: "Omkareshwar", row: 3 },
 ];
 
@@ -76,14 +76,14 @@ export function CinematicGallery() {
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4 md:p-12"
             onClick={() => setSelectedImage(null)}
           >
-            <button 
+            <button
               className="absolute top-6 right-6 text-white hover:text-brand-gold transition-colors p-2"
               onClick={() => setSelectedImage(null)}
             >
               <X size={32} />
             </button>
-            
-            <button 
+
+            <button
               className="absolute left-4 md:left-12 text-white hover:text-brand-gold transition-colors p-2 z-10"
               onClick={handlePrev}
             >
@@ -105,7 +105,7 @@ export function CinematicGallery() {
               />
             </motion.div>
 
-            <button 
+            <button
               className="absolute right-4 md:right-12 text-white hover:text-brand-gold transition-colors p-2 z-10"
               onClick={handleNext}
             >

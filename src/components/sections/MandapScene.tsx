@@ -21,12 +21,12 @@ export function MandapScene() {
   const opacityText = useTransform(scrollYProgress, [0.4, 0.6], [0, 1]);
 
   return (
-    <section 
-      ref={containerRef} 
+    <section
+      ref={containerRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-brand-dark"
     >
       {/* Layer 1: Background Temple / Sky */}
-      <motion.div 
+      <motion.div
         className="absolute inset-0 z-0 opacity-40"
         style={{ y: yBg }}
       >
@@ -35,7 +35,7 @@ export function MandapScene() {
       </motion.div>
 
       {/* Layer 2: Mandap Pillars (Left and Right) */}
-      <motion.div 
+      <motion.div
         className="absolute inset-0 z-10 pointer-events-none"
         style={{ y: yPillars }}
       >
@@ -52,12 +52,12 @@ export function MandapScene() {
       </motion.div>
 
       {/* Layer 3: The Couple */}
-      <motion.div 
+      <motion.div
         className="relative z-20 w-80 h-[500px] mt-32 md:mt-16 mx-auto border-8 border-brand-gold rounded-t-full overflow-hidden shadow-[0_0_50px_rgba(212,175,55,0.6)]"
         style={{ opacity: opacityCouple, scale: scaleCouple }}
       >
         <Image
-          src={wedding.groom.photo} // Placeholder for couple image
+          src='/images/couple/together4.jpeg' // Placeholder for couple image
           alt="Wedding Ceremony"
           fill
           className="object-cover"
@@ -66,7 +66,7 @@ export function MandapScene() {
       </motion.div>
 
       {/* Layer 4: Text Overlay */}
-      <motion.div 
+      <motion.div
         className="absolute bottom-24 left-0 right-0 z-30 text-center px-4"
         style={{ opacity: opacityText }}
       >

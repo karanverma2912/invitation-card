@@ -13,7 +13,7 @@ export const wedding = {
     hometown: "Omkareshwar",
     photo: "/images/couple/damini.png",
     parents: {
-      mother: "Mrs. Asha Shivde",
+      mother: "Mrs. Aasha Shivde",
       father: "Mr. Surendra Shivde",
     },
   },

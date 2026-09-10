@@ -21,17 +21,17 @@ export function CoupleReveal() {
   const scaleCouple = useTransform(scrollYProgress, [0.8, 1], [0.8, 1]);
 
   return (
-    <section 
-      ref={containerRef} 
+    <section
+      ref={containerRef}
       className="relative h-[150vh] bg-brand-cream"
     >
       <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden">
-        
+
         {/* The Merging Portraits */}
         <div className="relative w-full max-w-4xl h-[500px] flex items-center justify-center">
-          
+
           {/* Groom Portrait */}
-          <motion.div 
+          <motion.div
             className="absolute z-10 w-64 h-80 rounded-t-full border-4 border-brand-gold overflow-hidden"
             style={{ x: xGroom, opacity: opacityIndividuals }}
           >
@@ -44,7 +44,7 @@ export function CoupleReveal() {
           </motion.div>
 
           {/* Bride Portrait */}
-          <motion.div 
+          <motion.div
             className="absolute z-10 w-64 h-80 rounded-t-full border-4 border-brand-maroon overflow-hidden"
             style={{ x: xBride, opacity: opacityIndividuals }}
           >
@@ -57,12 +57,12 @@ export function CoupleReveal() {
           </motion.div>
 
           {/* Couple Portrait (Revealed when merged) */}
-          <motion.div 
+          <motion.div
             className="absolute z-20 w-80 h-[400px] rounded-t-full border-8 border-brand-gold bg-brand-dark overflow-hidden shadow-[0_0_50px_rgba(212,175,55,0.4)]"
             style={{ opacity: opacityCouple, scale: scaleCouple }}
           >
             <Image
-              src="/images/couple/karan.jpg" // Use a couple placeholder here
+              src="/images/couple/together.jpeg" // Use a couple placeholder here
               alt="Karan & Damini"
               fill
               className="object-cover"
@@ -77,7 +77,7 @@ export function CoupleReveal() {
         </div>
 
         {/* Text appearing below */}
-        <motion.div 
+        <motion.div
           className="mt-12 text-center"
           style={{ opacity: opacityCouple }}
         >

@@ -9,6 +9,9 @@ export function HeroOpening({ onOpen }: { onOpen: () => void }) {
 
   const handleOpen = () => {
     setIsOpen(true);
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new Event("play-wedding-music"));
+    }
     setTimeout(() => {
       onOpen();
     }, 1500); // Give time for doors to open before enabling scroll/music

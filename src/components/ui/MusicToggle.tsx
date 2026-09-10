@@ -28,12 +28,22 @@ export function MusicToggle() {
       }
     };
 
+    const handleForcePlay = () => {
+      if (audioRef.current && audioRef.current.paused) {
+        audioRef.current.play()
+          .then(() => setIsPlaying(true))
+          .catch(console.error);
+      }
+    };
+
     document.addEventListener("click", handleInteraction);
     document.addEventListener("touchstart", handleInteraction);
+    window.addEventListener("play-wedding-music", handleForcePlay);
 
     return () => {
       document.removeEventListener("click", handleInteraction);
       document.removeEventListener("touchstart", handleInteraction);
+      window.removeEventListener("play-wedding-music", handleForcePlay);
     };
   }, []);
 
