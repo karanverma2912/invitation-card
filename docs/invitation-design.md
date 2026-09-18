@@ -1,0 +1,67 @@
+# Layered wedding invitation
+
+The invitation keeps the existing maroon, cream and gold palette, family details,
+ceremony schedule, mobile opening artwork and original photos.
+
+## Responsive experience
+
+- Hinged 3D doors introduce the invitation. The exit animation finishes before
+  focus moves to the invitation heading.
+- The couple portrait, hometown backdrop, gold arches, petals, date plaque and
+  seal occupy separate depth planes. Fine mouse input adds a spring-driven tilt;
+  touch input uses gentle scroll motion without intercepting native scrolling.
+- The desktop hero places the invitation beside the portrait. Phones use a
+  vertical composition with fluid image sizes and room for browser controls.
+- Reduced-motion preferences disable the tilt, scroll movement and particles.
+- Gallery photographs open in a native modal dialog with swipe, arrow-key and
+  Escape support. Focus returns to the triggering photograph on close.
+- Music plays only when a guest uses the music control. Location and promise
+  details work with touch and keyboard controls.
+
+## Confirm the wedding date
+
+The supplied details specify **11 February**, but do not confirm a year or a
+ceremony time. `src/data/wedding.ts` therefore leaves `dateISO` as `null`.
+The date remains visible; countdown and calendar actions are withheld.
+
+After confirming the year and time, set `dateISO` to an ISO 8601 date-time with
+an explicit offset for India (`+05:30`). The countdown uses this fixed instant,
+and the calendar link derives from the same value. After that instant, the copy
+says “Our forever has begun” rather than calling every following day the wedding
+day. The calendar event currently lasts three hours; confirm that duration too.
+
+The map link intentionally identifies Omkareshwar as a town. Add the exact
+wedding venue once it has been confirmed.
+
+## Photo asset
+
+Original photos remain unchanged. `public/images/couple/couple-cutout.png` is a
+new transparent derivative of `public/images/couple/together.jpeg`, prepared
+with the built-in image-generation tool for the foreground scene. Review the
+likeness before publishing; generative extraction may alter fine details.
+
+Prompt used:
+
+> Use case: background-extraction. Edit target: the provided original couple photograph. Asset type: a transparent PNG foreground layer for their personal wedding website. Remove ONLY the wall/background behind and between the two people, keeping both people together in exactly their original side by side positions. Preserve their actual identities, facial features, expressions, gaze, hair, skin, body shapes, pose, hands, red sari with gold details, jewelry, beige shirt and dark trousers EXACTLY as in the original. No beauty retouching or stylization. Keep original photographic texture. Crop excess empty space above heads and preserve both people down to the original bottom crop, no invented feet or changes of clothes. Clean accurate hair and fabric edges. Actual transparent alpha background, no solid backdrop, no checkerboard printed into the image. No text or other added objects.
+
+## Local checks
+
+Use the existing Yarn lockfile and package manager to install dependencies, then
+run `yarn lint` and `yarn build`. Native CSS scrolling replaces the unused Lenis
+wrapper, which relied on React 18 types despite the app using React 19.
+
+Preview with `yarn dev` or `yarn start` after a production build. Check the opening,
+hero, navigation, schedule, gallery, music control and RSVP at phone and laptop
+widths, including landscape and reduced-motion mode.
+
+## Verification performed
+
+Production build, TypeScript, ESLint and whitespace checks passed. Automated
+Chromium checks passed at 320×740, 390×844, 768×1024, 1366×768 and 844×390,
+plus 390×844 with reduced motion. Checks covered opening-button visibility,
+focus and scroll restoration, horizontal overflow across the main sections,
+opt-in audio state, location and promise controls, gallery navigation and
+synthetic touch swipes, Escape, focus return, image loads, and suppressed
+calendar actions while the year is unknown. No browser runtime errors or
+HTTP failures were recorded. Desktop and mobile screenshots were inspected.
+These are browser emulations, not physical-device or Safari tests.

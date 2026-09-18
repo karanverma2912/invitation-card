@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { MotionConfig } from "framer-motion";
 import { HeroOpening } from "@/components/sections/HeroOpening";
 import { MaheshwarIntro } from "@/components/sections/MaheshwarIntro";
 import { OmkareshwarIntro } from "@/components/sections/OmkareshwarIntro";
@@ -21,34 +22,76 @@ import { ParticleSystem } from "@/components/ui/ParticleSystem";
 
 export default function Home() {
   const [hasOpened, setHasOpened] = useState(false);
+  useEffect(() => {
+    if (hasOpened) {
+      document.getElementById("couple-heading")?.focus({ preventScroll: true });
+      return;
+    }
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [hasOpened]);
 
   return (
-    <main className={`relative ${!hasOpened ? 'h-screen overflow-hidden' : ''}`}>
-      <MusicToggle />
+    <MotionConfig reducedMotion="user">
       {!hasOpened && <HeroOpening onOpen={() => setHasOpened(true)} />}
-      
-      {hasOpened && (
-        <>
-          <ParticleSystem />
-          
-          <div className="flex flex-col">
-            <MaheshwarIntro />
-            <OmkareshwarIntro />
-            <JourneyMap />
-            <CoupleReveal />
-            <CountdownSection />
-            <EventsTimeline />
-            <BaraatJourney />
-            <MandapScene />
-            <InteractiveVows />
-            <FamilySection />
-            <ReceptionSection />
-            <CinematicGallery />
-            <RSVPContact />
-            <ClosingScene />
-          </div>
-        </>
-      )}
-    </main>
+      <div inert={!hasOpened} aria-hidden={!hasOpened}>
+        <a href="#couple-heading" className="skip-link">
+          Skip to invitation
+        </a>
+        <header className="invitation-header">
+          <a
+            href="#invitation"
+            className="monogram"
+            aria-label="Karan and Damini, back to invitation"
+          >
+            K<span>&amp;</span>D
+          </a>
+          <nav aria-label="Invitation sections">
+            <a href="#our-story">Our story</a>
+            <a href="#celebrations">Celebrations</a>
+            <a href="#memories">Memories</a>
+            <a href="#rsvp">RSVP</a>
+          </nav>
+          <span className="header-date">11 · FEB</span>
+        </header>
+        <main id="invitation">
+          <CoupleReveal />
+          {hasOpened && (
+            <>
+              <ParticleSystem />
+              <div id="our-story" className="story-chapter">
+                <div className="chapter-heading">
+                  <span className="eyebrow">01 / Where it all begins</span>
+                  <h2>Two towns, one love story.</h2>
+                </div>
+                <MaheshwarIntro />
+                <OmkareshwarIntro />
+              </div>
+              <JourneyMap />
+              <CountdownSection />
+              <div id="celebrations">
+                <EventsTimeline />
+              </div>
+              <BaraatJourney />
+              <MandapScene />
+              <InteractiveVows />
+              <FamilySection />
+              <ReceptionSection />
+              <div id="memories">
+                <CinematicGallery />
+              </div>
+              <div id="rsvp">
+                <RSVPContact />
+              </div>
+              <ClosingScene />
+              <MusicToggle />
+            </>
+          )}
+        </main>
+      </div>
+    </MotionConfig>
   );
 }

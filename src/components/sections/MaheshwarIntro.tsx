@@ -1,11 +1,17 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useReducedMotion,
+} from "framer-motion";
 import { wedding } from "@/data/wedding";
 import Image from "next/image";
 
 export function MaheshwarIntro() {
+  const reducedMotion = useReducedMotion();
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -13,19 +19,23 @@ export function MaheshwarIntro() {
   });
 
   const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const opacityText = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
+  const opacityText = useTransform(
+    scrollYProgress,
+    [0, 0.3, 0.7, 1],
+    [0, 1, 1, 0],
+  );
   const yText = useTransform(scrollYProgress, [0, 1], ["50px", "-50px"]);
   const scaleImage = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 1.1]);
 
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-brand-dark"
+      className="relative min-h-[680px] py-20 md:py-24 flex items-center justify-center overflow-hidden bg-brand-dark"
     >
       {/* Background Parallax */}
       <motion.div
-        className="absolute inset-0 z-0 opacity-60"
-        style={{ y: yBg }}
+        className="absolute -inset-y-24 inset-x-0 z-0 opacity-60"
+        style={reducedMotion ? undefined : { y: yBg }}
       >
         <Image
           src="/images/maheshwar/intro_hq.jpg"
@@ -40,17 +50,18 @@ export function MaheshwarIntro() {
       {/* Content */}
       <motion.div
         className="relative z-10 container mx-auto px-6 flex flex-col-reverse md:flex-row items-center gap-12"
-        style={{ opacity: opacityText, y: yText }}
+        style={reducedMotion ? undefined : { opacity: opacityText, y: yText }}
       >
         <div className="flex-1 relative">
           <motion.div
-            className="relative w-72 h-[400px] mx-auto md:mr-auto border-8 border-brand-gold/30 rounded-t-full overflow-hidden shadow-[0_0_30px_rgba(212,175,55,0.2)]"
-            style={{ scale: scaleImage }}
+            className="relative w-[min(72vw,320px)] h-[380px] mx-auto md:mr-auto border-8 border-brand-gold/30 rounded-t-full overflow-hidden shadow-[0_0_30px_rgba(212,175,55,0.2)]"
+            style={reducedMotion ? undefined : { scale: scaleImage }}
           >
             <Image
               src={wedding.groom.photo}
               alt={wedding.groom.name}
               fill
+              sizes="(max-width: 767px) 72vw, 320px"
               className="object-cover"
             />
           </motion.div>
