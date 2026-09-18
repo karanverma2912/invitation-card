@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { DepthScene } from "@/components/ui/DepthScene";
+import { ChapterSparkles } from "@/components/ui/ChapterSparkles";
 import { wedding } from "@/data/wedding";
 
 export function MandapScene() {
@@ -39,6 +40,7 @@ export function MandapScene() {
         <div className="scene-petal scene-petal-one" aria-hidden="true" />
         <div className="scene-petal scene-petal-three" aria-hidden="true" />
       </DepthScene>
+    <ChapterSparkles />
     </section>
   );
 }

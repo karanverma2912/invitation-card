@@ -62,3 +62,11 @@ synthetic touch swipes, Escape, focus return, image loads, and suppressed
 calendar actions while the ceremony time is unknown. No browser runtime errors or
 HTTP failures were recorded. Desktop and mobile screenshots were inspected.
 These are browser emulations, not physical-device or Safari tests.
+
+## Additional animation pass
+
+- 36 drifting rose/gold petals on desktop; 18 on phones, with varied sizes and drift directions.
+- A route line draws between hometowns and location pins arrive in sequence.
+- Countdown digits flip when their value changes; vow cards stagger into view and respond to taps.
+- The baraat photo moves independently as guests scroll, clipped inside its frame.
+- Mandap and closing sparkles pause outside the viewport. Reduced-motion preferences suppress these effects.

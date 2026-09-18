@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { MapPin } from "lucide-react";
 
 const locations = [
@@ -19,6 +20,7 @@ const locations = [
 ];
 
 export function JourneyMap() {
+  const reduced = useReducedMotion();
   const [active, setActive] = useState(0);
   return (
     <section className="journey-chapter" aria-labelledby="journey-heading">
@@ -29,8 +31,14 @@ export function JourneyMap() {
         <em>One destiny.</em>
       </h2>
       <div className="journey-locations">
+        <motion.div className="journey-thread" aria-hidden="true" initial={{ scaleX: reduced ? 1 : 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: 1.4 }} />
         {locations.map((location, index) => (
-          <button
+          <motion.button
+            initial={reduced ? false : { opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.16, duration: 0.5 }}
+            whileTap={reduced ? undefined : { scale: 0.93 }}
             type="button"
             key={location.name}
             aria-pressed={active === index}
@@ -41,12 +49,12 @@ export function JourneyMap() {
               <MapPin size={21} aria-hidden="true" />
             </span>
             {location.name}
-          </button>
+          </motion.button>
         ))}
       </div>
-      <p id="journey-detail" className="journey-detail" aria-live="polite">
+      <motion.p key={active} initial={reduced ? false : { opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} id="journey-detail" className="journey-detail" aria-live="polite">
         {locations[active].detail}
-      </p>
+      </motion.p>
     </section>
   );
 }

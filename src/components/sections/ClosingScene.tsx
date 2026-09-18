@@ -2,6 +2,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { ChapterSparkles } from "@/components/ui/ChapterSparkles";
 import { wedding } from "@/data/wedding";
 
 export function ClosingScene() {
@@ -76,6 +77,7 @@ export function ClosingScene() {
       `,
         }}
       />
+    <ChapterSparkles />
     </section>
   );
 }

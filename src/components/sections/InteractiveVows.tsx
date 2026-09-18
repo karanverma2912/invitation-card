@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const vows = [
   {
@@ -32,6 +32,7 @@ const vows = [
 ];
 
 export function InteractiveVows() {
+  const reduced = useReducedMotion();
   const [active, setActive] = useState(0);
   return (
     <section className="vows-chapter" aria-labelledby="vows-heading">
@@ -45,7 +46,12 @@ export function InteractiveVows() {
             aria-pressed={active === index}
             aria-controls="vow-description"
             onClick={() => setActive(index)}
-            whileHover={{ y: -6 }}
+            initial={reduced ? false : { opacity: 0, y: 28, rotate: index % 2 ? 5 : -5 }}
+            whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.5, delay: index * 0.06 }}
+            whileHover={reduced ? undefined : { y: -6 }}
+            whileTap={reduced ? undefined : { scale: 0.94 }}
             className="vow-card"
           >
             <span lang="hi">{vow.title}</span>
@@ -54,9 +60,9 @@ export function InteractiveVows() {
           </motion.button>
         ))}
       </div>
-      <p id="vow-description" aria-live="polite" className="vow-description">
+      <motion.p key={active} initial={reduced ? false : { opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} id="vow-description" aria-live="polite" className="vow-description">
         {vows[active].desc}
-      </p>
+      </motion.p>
     </section>
   );
 }

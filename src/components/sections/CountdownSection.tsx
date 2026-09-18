@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { wedding } from "@/data/wedding";
 
 export function CountdownSection() {
+  const reduced = useReducedMotion();
   const [remaining, setRemaining] = useState<number | null>(null);
   const timestamp = Date.parse(wedding.countdownDateISO);
   useEffect(() => {
@@ -37,7 +39,7 @@ export function CountdownSection() {
         <div className="countdown-grid">
           {units.map(([label, value]) => (
             <div key={label}>
-              <strong>{String(value).padStart(2, "0")}</strong>
+              <motion.strong key={value} initial={reduced ? false : { rotateX: -65, opacity: 0.4 }} animate={{ rotateX: 0, opacity: 1 }} transition={{ duration: 0.35 }}>{String(value).padStart(2, "0")}</motion.strong>
               <span>{label}</span>
             </div>
           ))}
