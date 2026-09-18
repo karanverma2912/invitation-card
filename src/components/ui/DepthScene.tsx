@@ -22,13 +22,17 @@ export function DepthScene({
   const reducedMotion = useReducedMotion();
   const tiltX = useMotionValue(0);
   const tiltY = useMotionValue(0);
-  const rotateX = useSpring(tiltX, { stiffness: 90, damping: 24 });
-  const rotateY = useSpring(tiltY, { stiffness: 90, damping: 24 });
+  const pointerX = useSpring(tiltX, { stiffness: 90, damping: 24 });
+  const pointerY = useSpring(tiltY, { stiffness: 90, damping: 24 });
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
-  const y = useTransform(scrollYProgress, [0, 1], [16, -16]);
+  const y = useTransform(scrollYProgress, [0, 1], [32, -32]);
+  const scrollTiltX = useTransform(scrollYProgress, [0, 1], [9, -9]);
+  const scrollTiltY = useTransform(scrollYProgress, [0, 1], [-6, 6]);
+  const rotateX = useTransform(() => pointerX.get() + scrollTiltX.get());
+  const rotateY = useTransform(() => pointerY.get() + scrollTiltY.get());
 
   function move(event: PointerEvent<HTMLDivElement>) {
     if (reducedMotion || event.pointerType !== "mouse") return;

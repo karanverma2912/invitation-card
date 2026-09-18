@@ -9,24 +9,21 @@ ceremony schedule, mobile opening artwork and original photos.
   focus moves to the invitation heading.
 - The couple portrait, hometown backdrop, gold arches, petals, date plaque and
   seal occupy separate depth planes. Fine mouse input adds a spring-driven tilt;
-  touch input uses gentle scroll motion without intercepting native scrolling.
+  touch input uses scroll-driven 3D rotation and parallax without intercepting native scrolling.
 - The desktop hero places the invitation beside the portrait. Phones use a
   vertical composition with fluid image sizes and room for browser controls.
 - Reduced-motion preferences disable the tilt, scroll movement and particles.
 - Gallery photographs open in a native modal dialog with swipe, arrow-key and
   Escape support. Focus returns to the triggering photograph on close.
-- Music plays only when a guest uses the music control. Location and promise
+- Music starts synchronously when the guest taps Open our invitation. The persistent audio player can then be paused or resumed using the music control. Location and promise
   details work with touch and keyboard controls.
 
 ## Confirm the wedding date
 
-The supplied details specify **11 February**, but do not confirm a year or a
-ceremony time. `src/data/wedding.ts` therefore leaves `dateISO` as `null`.
-The date remains visible; countdown and calendar actions are withheld.
+The countdown targets **11 February 2027 at midnight in India**, assuming the upcoming February wedding. This fixed date is configured as `countdownDateISO` in `src/data/wedding.ts`; it does not roll into another year after expiry. The ceremony timestamp `dateISO` stays `null` until its exact time is confirmed, so no midnight ceremony calendar event is offered.
 
 After confirming the year and time, set `dateISO` to an ISO 8601 date-time with
-an explicit offset for India (`+05:30`). The countdown uses this fixed instant,
-and the calendar link derives from the same value. After that instant, the copy
+an explicit offset for India (`+05:30`). The calendar link uses that ceremony timestamp. The countdown separately targets the start of the wedding day. After that instant, the copy
 says “Our forever has begun” rather than calling every following day the wedding
 day. The calendar event currently lasts three hours; confirm that duration too.
 
@@ -60,8 +57,8 @@ Production build, TypeScript, ESLint and whitespace checks passed. Automated
 Chromium checks passed at 320×740, 390×844, 768×1024, 1366×768 and 844×390,
 plus 390×844 with reduced motion. Checks covered opening-button visibility,
 focus and scroll restoration, horizontal overflow across the main sections,
-opt-in audio state, location and promise controls, gallery navigation and
+opening-triggered audio, pause/resume, ticking countdown, scroll-driven depth, location and promise controls, gallery navigation and
 synthetic touch swipes, Escape, focus return, image loads, and suppressed
-calendar actions while the year is unknown. No browser runtime errors or
+calendar actions while the ceremony time is unknown. No browser runtime errors or
 HTTP failures were recorded. Desktop and mobile screenshots were inspected.
 These are browser emulations, not physical-device or Safari tests.

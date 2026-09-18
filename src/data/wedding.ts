@@ -21,8 +21,9 @@ export const wedding = {
     phone: "8435109070",
   },
   weddingDate: "11 February",
-  // Set a confirmed ISO timestamp with an explicit timezone to enable the countdown
-  // and calendar link. Do not infer the year or ceremony time from today.
+  // Countdown to the start of the upcoming wedding day in India.
+  countdownDateISO: "2027-02-11T00:00:00+05:30",
+  // A precise ceremony time is still needed for the calendar link.
   dateISO: null as string | null,
   reception: {
     date: "12 February",

@@ -5,7 +5,7 @@ import { wedding } from "@/data/wedding";
 
 export function CountdownSection() {
   const [remaining, setRemaining] = useState<number | null>(null);
-  const timestamp = wedding.dateISO ? Date.parse(wedding.dateISO) : NaN;
+  const timestamp = Date.parse(wedding.countdownDateISO);
   useEffect(() => {
     if (!Number.isFinite(timestamp)) return;
     const update = () => setRemaining(Math.max(0, timestamp - Date.now()));

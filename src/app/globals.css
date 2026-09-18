@@ -152,11 +152,20 @@
   bottom: 0;
   width: 50%;
   backface-visibility: hidden;
-  background-image:
-    linear-gradient(#2f101879, #210d1480), url("/images/backgrounds/mandap.jpg");
-  background-size: 200% 100%;
+  overflow: hidden;
   box-shadow: inset 0 0 80px #190812;
 }
+.cover-door::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100vw;
+  background: linear-gradient(#2f101879, #210d1480),
+    url("/images/backgrounds/mandap.jpg") center/cover;
+}
+.cover-door-left::before { left: 0; }
+.cover-door-right::before { right: 0; }
 .cover-door-left {
   left: 0;
   transform-origin: left center;
@@ -674,11 +683,19 @@
   margin: 30px auto 0;
   gap: 14px;
 }
+.countdown-grid > div {
+  padding: 16px 4px;
+  border: 1px solid #d9bc8355;
+  border-radius: 8px;
+  background: linear-gradient(145deg, #ffffff0f, #28091133);
+  box-shadow: 0 6px 0 #3c101d66, 0 15px 25px #28091130;
+}
 .countdown-grid strong {
   font:
     42px var(--font-playfair),
     serif;
   display: block;
+  font-variant-numeric: tabular-nums;
 }
 .countdown-grid span {
   font-size: 9px;
@@ -1156,7 +1173,7 @@
   .monogram {
     font-size: 24px;
   }
-  .cover-door {
+  .cover-door::before {
     background-image:
       linear-gradient(#2f101857, #210d1475),
       url("/images/backgrounds/mandap2.png");

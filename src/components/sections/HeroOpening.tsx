@@ -5,7 +5,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { wedding } from "@/data/wedding";
 
-export function HeroOpening({ onOpen }: { onOpen: () => void }) {
+export function HeroOpening({ onOpen, onStart }: { onOpen: () => void; onStart: () => void }) {
   const [opening, setOpening] = useState(false);
   const reducedMotion = useReducedMotion();
   const duration = reducedMotion ? 0.15 : 1.25;
@@ -62,7 +62,10 @@ export function HeroOpening({ onOpen }: { onOpen: () => void }) {
               <button
                 className="gold-button"
                 disabled={opening}
-                onClick={() => setOpening(true)}
+                onClick={() => {
+                  onStart();
+                  setOpening(true);
+                }}
               >
                 Open our invitation{" "}
                 <ArrowUpRight size={18} aria-hidden="true" />

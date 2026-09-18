@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MotionConfig } from "framer-motion";
 import { HeroOpening } from "@/components/sections/HeroOpening";
 import { MaheshwarIntro } from "@/components/sections/MaheshwarIntro";
@@ -17,10 +17,12 @@ import { ReceptionSection } from "@/components/sections/ReceptionSection";
 import { CinematicGallery } from "@/components/sections/CinematicGallery";
 import { RSVPContact } from "@/components/sections/RSVPContact";
 import { ClosingScene } from "@/components/sections/ClosingScene";
-import { MusicToggle } from "@/components/ui/MusicToggle";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { MusicToggle, type MusicHandle } from "@/components/ui/MusicToggle";
 import { ParticleSystem } from "@/components/ui/ParticleSystem";
 
 export default function Home() {
+  const music = useRef<MusicHandle>(null);
   const [hasOpened, setHasOpened] = useState(false);
   useEffect(() => {
     if (hasOpened) {
@@ -36,7 +38,8 @@ export default function Home() {
 
   return (
     <MotionConfig reducedMotion="user">
-      {!hasOpened && <HeroOpening onOpen={() => setHasOpened(true)} />}
+      {!hasOpened && <HeroOpening onStart={() => music.current?.play()} onOpen={() => setHasOpened(true)} />}
+      <MusicToggle ref={music} visible={hasOpened} />
       <div inert={!hasOpened} aria-hidden={!hasOpened}>
         <a href="#couple-heading" className="skip-link">
           Skip to invitation
@@ -70,24 +73,24 @@ export default function Home() {
                 <MaheshwarIntro />
                 <OmkareshwarIntro />
               </div>
-              <JourneyMap />
-              <CountdownSection />
+              <ScrollReveal><JourneyMap /></ScrollReveal>
+              <ScrollReveal><CountdownSection /></ScrollReveal>
               <div id="celebrations">
                 <EventsTimeline />
               </div>
-              <BaraatJourney />
-              <MandapScene />
-              <InteractiveVows />
-              <FamilySection />
-              <ReceptionSection />
+              <ScrollReveal><BaraatJourney /></ScrollReveal>
+              <ScrollReveal><MandapScene /></ScrollReveal>
+              <ScrollReveal><InteractiveVows /></ScrollReveal>
+              <ScrollReveal><FamilySection /></ScrollReveal>
+              <ScrollReveal><ReceptionSection /></ScrollReveal>
               <div id="memories">
                 <CinematicGallery />
               </div>
               <div id="rsvp">
                 <RSVPContact />
               </div>
-              <ClosingScene />
-              <MusicToggle />
+              <ScrollReveal><ClosingScene /></ScrollReveal>
+
             </>
           )}
         </main>

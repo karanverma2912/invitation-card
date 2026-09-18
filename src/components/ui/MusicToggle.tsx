@@ -1,12 +1,21 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { type Ref, useImperativeHandle, useRef, useState } from "react";
 import { Music2, VolumeX } from "lucide-react";
 
-export function MusicToggle() {
+export type MusicHandle = { play: () => void };
+
+export function MusicToggle({ ref, visible }: { ref: Ref<MusicHandle>; visible: boolean }) {
   const audio = useRef<HTMLAudioElement>(null);
   const [playing, setPlaying] = useState(false);
   const [error, setError] = useState(false);
+
+  useImperativeHandle(ref, () => ({
+    play() {
+      const promise = audio.current?.play();
+      promise?.then(() => setError(false)).catch(() => setError(true));
+    },
+  }), []);
 
   async function toggle() {
     if (!audio.current) return;
@@ -28,7 +37,7 @@ export function MusicToggle() {
         ref={audio}
         src="/music/Vaaroon Forever.mp3"
         loop
-        preload="none"
+        preload="metadata"
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
         onError={() => {
@@ -36,7 +45,7 @@ export function MusicToggle() {
           setError(true);
         }}
       />
-      <button
+      {visible && <button
         type="button"
         onClick={toggle}
         className="music-toggle"
@@ -49,8 +58,8 @@ export function MusicToggle() {
           <VolumeX size={19} aria-hidden="true" />
         )}
         <span>{playing ? "Sound on" : "Sound off"}</span>
-      </button>
-      {error && (
+      </button>}
+      {visible && error && (
         <p role="status" className="music-error">
           Music could not play. Tap to try again.
         </p>

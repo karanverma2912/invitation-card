@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import coupleCutout from "../../../public/images/couple/couple-cutout.png";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { wedding } from "@/data/wedding";
 import { DepthScene } from "@/components/ui/DepthScene";
@@ -58,7 +59,7 @@ export function CoupleReveal() {
         </div>
         <div className="scene-portrait">
           <Image
-            src="/images/couple/couple-cutout.png"
+            src={coupleCutout}
             alt={`${wedding.bride.name} and ${wedding.groom.name}`}
             fill
             sizes="(max-width: 767px) 88vw, 540px"
