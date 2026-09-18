@@ -1,17 +1,6 @@
-"use client";
+import { type ReactNode } from "react";
 
-import { ReactLenis } from '@studio-freight/react-lenis';
-import { ReactNode } from 'react';
-
+/** Native CSS smooth scrolling respects touch input and reduced-motion settings. */
 export function SmoothScroll({ children }: { children: ReactNode }) {
-  return (
-    <ReactLenis root options={{
-      lerp: 0.1,
-      duration: 0.8,
-      smoothWheel: true,
-      wheelMultiplier: 0.85 // Just a 15% reduction in scroll distance
-    }}>
-      {children as any}
-    </ReactLenis>
-  );
+  return <>{children}</>;
 }
