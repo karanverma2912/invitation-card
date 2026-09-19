@@ -1,7 +1,7 @@
 "use client";
 
 import { type Ref, useImperativeHandle, useRef, useState } from "react";
-import { Music2, VolumeX } from "lucide-react";
+import { VolumeX } from "lucide-react";
 
 export type MusicHandle = { play: () => void };
 
@@ -53,7 +53,7 @@ export function MusicToggle({ ref, visible }: { ref: Ref<MusicHandle>; visible: 
         aria-pressed={playing}
       >
         {playing ? (
-          <Music2 size={19} aria-hidden="true" />
+          <span className="music-equalizer" aria-hidden="true"><i /><i /><i /><i /></span>
         ) : (
           <VolumeX size={19} aria-hidden="true" />
         )}

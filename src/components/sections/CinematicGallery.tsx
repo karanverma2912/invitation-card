@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, X, ArrowUpRight } from "lucide-react";
 
@@ -28,6 +29,7 @@ const images = [
 ];
 
 export function CinematicGallery() {
+  const reduced = useReducedMotion();
   const [selected, setSelected] = useState<number | null>(null);
   const dialog = useRef<HTMLDialogElement>(null);
   const touchX = useRef<number | null>(null);
@@ -57,7 +59,7 @@ export function CinematicGallery() {
 
   return (
     <section className="gallery-chapter" aria-labelledby="gallery-heading">
-      <div className="gallery-heading">
+      <motion.div className="gallery-heading" initial={reduced ? false : { opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
         <div>
           <span className="eyebrow">A few pages from our story</span>
           <h2 id="gallery-heading">Us, in moments.</h2>
@@ -67,13 +69,18 @@ export function CinematicGallery() {
           <br />
           Memories for a lifetime.
         </p>
-      </div>
+      </motion.div>
       <div className="gallery-grid">
         {images.map((photo, index) => (
+          <motion.div className="memory-reveal" key={photo.src}
+            initial={reduced ? false : { opacity: 0, y: 48, rotateX: 12 }}
+            whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.75, delay: (index % 2) * 0.12 }}
+          >
           <button
             type="button"
             className="memory-card"
-            key={photo.src}
             aria-label={`View photo: ${photo.caption}`}
             onClick={(event) => {
               lastTrigger.current = event.currentTarget;
@@ -94,6 +101,7 @@ export function CinematicGallery() {
               <ArrowUpRight size={16} aria-hidden="true" />
             </span>
           </button>
+          </motion.div>
         ))}
       </div>
       <p className="gallery-hint">Tap a photograph to step a little closer.</p>

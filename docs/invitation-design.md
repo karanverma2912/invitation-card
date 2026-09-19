@@ -70,3 +70,7 @@ These are browser emulations, not physical-device or Safari tests.
 - Countdown digits flip when their value changes; vow cards stagger into view and respond to taps.
 - The baraat photo moves independently as guests scroll, clipped inside its frame.
 - Mandap and closing sparkles pause outside the viewport. Reduced-motion preferences suppress these effects.
+
+## Gallery and RSVP polish
+
+Photo cards now rise into view individually while preserving their existing tilted frames and lightbox controls. The RSVP envelope draws its outline on entry; the heading and contact links reveal in sequence. The music control shows moving equalizer bars only during playback. All new movement respects reduced-motion preferences.

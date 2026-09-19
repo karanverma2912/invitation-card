@@ -880,7 +880,9 @@
   perspective: 1400px;
   padding: 10px 10px 28px;
 }
+.memory-reveal { min-width: 0; perspective: 1000px; }
 .memory-card {
+  width: 100%;
   min-width: 0;
   padding: 11px;
   background: #fffaf0;
@@ -892,7 +894,7 @@
     transform 0.45s,
     box-shadow 0.45s;
 }
-.memory-card:nth-child(even) {
+.memory-reveal:nth-child(even) .memory-card {
   transform: translateY(22px) rotate(4deg) rotateY(-5deg);
 }
 .memory-card:hover,
@@ -1543,7 +1545,7 @@
   .memory-card:hover {
     transform: rotate(-4deg);
   }
-  .memory-card:nth-child(even):hover {
+  .memory-reveal:nth-child(even) .memory-card:hover {
     transform: translateY(22px) rotate(4deg);
   }
 }
@@ -1708,3 +1710,12 @@
 @media (prefers-reduced-motion: reduce) {
   .chapter-sparkles { display: none; }
 }
+
+.rsvp-envelope { display: block; width: 72px; height: 54px; margin: 0 auto 25px; color: #ad8549; }
+.music-toggle .music-equalizer { display: flex; align-items: center; gap: 3px; height: 20px; }
+.music-equalizer i { display: block; width: 2px; height: 16px; border-radius: 2px; background: currentColor; transform-origin: bottom; animation: music-bar 0.8s ease-in-out infinite alternate; }
+.music-equalizer i:nth-child(2) { animation-delay: -0.5s; height: 12px; }
+.music-equalizer i:nth-child(3) { animation-delay: -0.2s; height: 19px; }
+.music-equalizer i:nth-child(4) { animation-delay: -0.7s; height: 10px; }
+@keyframes music-bar { from { transform: scaleY(0.35); } to { transform: scaleY(1); } }
+@media (prefers-reduced-motion: reduce) { .music-equalizer i { animation: none; } }
